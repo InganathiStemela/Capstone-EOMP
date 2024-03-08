@@ -1,12 +1,31 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>
+    <NavbarComp/>
+    <router-view/>
+
+  </div>
+
+  
 </template>
+<script>
+import NavbarComp from './components/NavbarComp.vue';
+import FooterComp from './components/FooterComp.vue';
+export default {
+  components: {NavbarComp,
+    FooterComp
+  }
+}
+</script>
 
 <style>
+body {
+  background-image: url(https://i.postimg.cc/ncH4TprZ/2.png);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
