@@ -14,7 +14,7 @@
 </div>
 
 <div class="card-container">
-<div class="card" style="width: 20rem;">
+<div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Our Commitment</h5>
     <p class="card-text">At NATURAL GLOW, we are committed to using only the finest natural ingredients in our products. From soothing botanical extracts to nourishing plant oils, each ingredient is carefully selected for its proven benefits and safety profile. We believe in transparency and strive to provide our customers with full disclosure of our ingredient lists, ensuring peace of mind and trust in our formulations.</p>
@@ -51,6 +51,7 @@
 
 .card-container {
   display: flex;
+  justify-content: center;
   flex-wrap: nowrap;
   gap: 20px;
   overflow-x: auto;
@@ -64,7 +65,7 @@
   overflow: hidden; 
   position: relative;
   background-color: rgba(255, 255, 255, 0.5);
-  flex: 0 1 20rem;
+  flex: 0 1 auto;
 }
 
 

@@ -1,85 +1,64 @@
 <template>
-    <div class="contact">
-    <div class="contact-form-wrapper">
-    <form action="https://formspree.io/f/xdoqoqjz" class="contact-form" method="post">
+    <div class="container">
 
-      <div>
-        <input type="text" class="form-control rounded border-black mb-3 form-input" id="name" name="name" placeholder="Name" required>
+      <h1>CONTACT US</h1>
+      <div class="form">
+        <form action="" method="POST">
+          <label for="name">Name:</label><br>
+          <input type="text" class="input-field" req placeholder="Please enter your Name" required="name"  oninvalid="this.setCustomValidity('Please Enter Your Name')"
+          oninput="this.setCustomValidity('')"><br>
+          <label for="email">Email:</label><br>
+          <input type="email" name="email" class="input-field" placeholder="Enter your email address"  required="email" oninvalid="this.setCustomValidity('Please Enter Your Email')"
+          oninput="this.setCustomValidity('')"><br>
+          <label>Message:</label><br>
+          <textarea name="message" class="textarea-field" placeholder="Please type your message" required="message"   oninvalid="this.setCustomValidity('Please Enter Your Message')"
+          oninput="this.setCustomValidity('')"></textarea><br>
+          <button type="submit" class="submit-button">Send</button>
+        </form>
       </div>
-      <div>
-        <input type="email" class="form-control rounded border-black mb-3 form-input" id="email" name="email" placeholder="Email" required>
-      </div>
-      <div>
-        <textarea id="message" class="form-control rounded border-black mb-3 form-text-area" name="message" rows="5" cols="30" placeholder="Message" required></textarea>
-      </div>
-      <div class="submit-button-wrapper">
-        <input type="submit" value="Submit" class="sub">
-      </div>
-
-
-
-      <aside class="contact-info">
-        <div>
-      <i class="fas fa-phone black"></i> 
-      <span>Phone: +27 68 227 2351</span>
     </div>
-    <div>
-      <i class="fab fa-github black"></i> 
-      <span>GitHub: <a href="https://github.com/InganathiStemela">InganathiStemela</a></span>
-    </div>
-    
-    <div>
-      <i class="fab fa-linkedin black"></i> 
-      <span>LinkedIn: <a href="https://www.linkedin.com/in/inganathi-stemela-5624362b6/">Inganathi Stemela</a></span>
-    </div>
-  
-    <div>
-      <i class="far fa-envelope black"></i>
-      <span>Email: <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox">inganathistemela13@gmail.com</a></span>
-    </div>
-  </aside>
-    </form>
-  </div>
-  </div>
   </template>
-  
   <script>
-  
+  export default {
+  }
   </script>
   <style scoped>
-  .contact-form-wrapper {
-  display: flex;
-  justify-content: center;
-  border: 2px solid black; 
-  padding: 20px;
-}
-
-.title {
-  border-bottom: 2px solid black; 
-  margin-bottom: 20px; 
-  text-align: center;
-}
-
-.sub {
-  margin: 0 0 0 35%;
-  background-color: black;
-  color: white;
-}
-
-.contact-info {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.contact-info div {
-  margin-bottom: 10px;
-}
-
-.contact-info i {
-  margin-right: 10px;
-}
-
-.black {
-  color: rgb(219, 68, 68);
-}
-</style>
+  .form {
+    padding: 20px;
+    justify-content: center;
+  }
+  .container{
+    width: 40%;
+    margin: auto;
+    border-radius: 8px;
+    border:1px solid green;
+    box-shadow: 4px 8px 0px green;
+  }
+  .input-field,
+  .textarea-field {
+    width: 40%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  .submit-button {
+    background-color: #D9D9D9;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .submit-button:hover {
+    background-color: #45A049;
+  }
+  label {
+    font-weight: bold;
+  }
+  </style>
