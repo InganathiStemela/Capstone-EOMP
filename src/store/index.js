@@ -17,6 +17,9 @@ export default createStore({
     setProduct(state, product){
       state.product = product
     },
+    setMsg(state, Msg){
+      state.Msg = Msg
+    },
   },
   actions: {
     async fetchProducts(context) {
