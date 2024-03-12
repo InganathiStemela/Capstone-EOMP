@@ -24,79 +24,79 @@
 import SingleComp from '@/components/SingleComp.vue';
 import axios from 'axios';
 
-// export default {
-//   components: { SingleComp },
-
-//   props: {
-//     product: Object
-//   },
-
-//   data() {
-//     return {
-//       selectedProduct: null,
-//     };
-//   },
-
-//   computed: {
-//     products() {
-//       return this.$store.state.products;
-//     },
-//     product() {
-//       return this.$store.state.product;
-//     },
-//   },
-
-//   methods: {
-//     async fetchProduct(ID) {
-//       try {
-//         const { data } = await axios.get(`${capstoneUrl}products/${ID}`);
-//         context.commit("setProduct", data.result[0]);
-//         console.log(data.result);
-//       } catch (e) {
-//         context.commit("setMsg", "An error occurred.");
-//       }
-//     },
-//   },
-
-//   mounted() {
-//     this.$store.dispatch('fetchProducts');
-//     this.$store.dispatch('fetchProduct');
-//   },
-// }
 export default {
   components: { SingleComp },
 
-  computed: {
-    products() {
-      return this.$store.state.products;
-    }
+  props: {
+    product: Object
   },
 
   data() {
     return {
-      selectedProduct: null
+      selectedProduct: null,
     };
+  },
+
+  computed: {
+    products() {
+      return this.$store.state.products;
+    },
+    product() {
+      return this.$store.state.product;
+    },
   },
 
   methods: {
     async fetchProduct(ID) {
       try {
         const { data } = await axios.get(`${capstoneUrl}products/${ID}`);
-        this.selectedProduct = data.result[0];
-      } catch (error) {
-        console.error('Error fetching product:', error);
+        context.commit("setProduct", data.result[0]);
+        console.log(data.result);
+      } catch (e) {
+        context.commit("setMsg", "An error occurred.");
       }
     },
-
-    showProductDetails(product) {
-      this.fetchProduct(product.ID);
-    }
   },
 
   mounted() {
     this.$store.dispatch('fetchProducts');
-  }
+    this.$store.dispatch('fetchProduct');
+  },
 }
+// export default {
+//   components: { SingleComp },
+
+//   computed: {
+//     products() {
+//       return this.$store.state.products;
+//     }
+//   },
+
+//   data() {
+//     return {
+//       selectedProduct: null
+//     };
+//   },
+
+//   methods: {
+//     async fetchProduct(ID) {
+//       try {
+//         const { data } = await axios.get(`${capstoneUrl}products/${ID}`);
+//         this.selectedProduct = data.result[0];
+//       } catch (error) {
+//         console.error('Error fetching product:', error);
+//       }
+//     },
+
+//     showProductDetails(product) {
+//       this.fetchProduct(product.ID);
+//     }
+//   },
+
+//   mounted() {
+//     this.$store.dispatch('fetchProducts');
+//   }
+// }
 
 </script>
 

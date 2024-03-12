@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-let capstoneUrl = "https://capstone-eomp-6qsh.onrender.com";
+let capstoneUrl = "https://capstone-eomp-6qsh.onrender.com/";
 
 
 export default createStore({

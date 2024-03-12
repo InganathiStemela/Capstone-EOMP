@@ -33,22 +33,57 @@ export default {
       loginError: '',
     };
   },
+//   methods: {
+//     login(req, res){
+//         const {EMAIL, PASSWORD} = req.body;
+        
+//         const qry = `SELECT * FROM users WHERE EMAIL = '${EMAIL}';`
+//         db.query(qry, async(err, results)=>{
+//             if(err) throw err
+//             if(!results?.length){
+//                 res.json({
+//                     status: res.statusCode,
+//                     msg: 'You provided wrong email address'
+//                 })
+//             }else{
+//                 const validPassword = await compare(PASSWORD, results[0].PASSWORD)
+//                 if(validPassword){
+//                     const token = createToken({
+//                         EMAIL,
+//                         PASSWORD
+//                     })
+//                 res.json({
+//                     status: res.statusCode,
+//                     msg: 'Welcome back!',
+//                     token,
+//                     result: results[0]
+//                 })
+//             }else{
+//                 res.json({
+//                     status: res.statusCode,
+//                     msg: 'Incorrect password'
+//                 })
+//             }
+//         }
+            
+//         })
+//     }
+//   }
+
   methods: {
     async login() {
+      const { EMAIL, PASSWORD } = this;
       try {
-        const response = await axios.post('http://localhost:6300/users/register', {
-          email: this.EMAIL,
-          password: this.PASSWORD,
-        });
+        const response = await axios.post('/login', { EMAIL, PASSWORD });
         console.log(response.data);
-      } catch (e) {
+      } catch (error) {
         console.error('Login failed:', error);
-        this.loginError = 'Invalid email or password. Please try again.';
       }
-    },
+    }
   },
-};
+}
 </script>
+
 
 
   <style scoped>

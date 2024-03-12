@@ -44,20 +44,23 @@ export default {
     };
   },
   methods: {
-    async postUser() {
-  try {
-    this.submitting = true;
-    const response = await axios.post('http://localhost:6300/users/register', {
-      username: this.USERNAME,
-      email: this.EMAIL,
-      password: this.PASSWORD,
-      saveAccount: this.saveAccount,
-    });
-  } catch (e) {
-    console.error('Registration failed:', error)
-  } finally {
-    this.submitting = false;
-  }
+    async register(req, res){
+        const data = req.body;
+        data.PASSWORD = await hash(data.PASSWORD, 15);
+
+        const user = {
+            EMAIL: data.EMAIL,
+            PASSWORD: data.PASSWORD
+        };
+        const query = `INSERT INTO users SET ?;`
+        db.query(query, [data], (err)=>{
+            if(err) throw err;
+            let token = createToken(user);
+            res.json({
+                status: res.statusCode,
+                msg: 'You are registered',
+            });
+        });
     }
   }
 }
