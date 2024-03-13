@@ -33,14 +33,12 @@ export default createStore({
     },
     async fetchProduct(context, ID) {
       try {
-        const { data } = await axios.get(`${capstoneUrl}products/${ID}`);
-        context.commit("setProduct", data.result[0]);
-        console.log(data.result);
+        const { result } = await (await axios.get(`${capstoneUrl}products/${ID}`)).data;
+        context.commit("setProduct", result[0]);
       } catch (e) {
         context.commit("setMsg", "An error occurred.");
       }
     },
-
   },
   modules: {
   }

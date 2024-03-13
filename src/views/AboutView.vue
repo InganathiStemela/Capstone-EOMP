@@ -34,7 +34,6 @@ export default {
 </script>
 
 <style scoped>
-/* @import url(''); */
 span{
   background-color: #F4DAF0;
 }
@@ -45,11 +44,12 @@ span{
   color:black;
   font-family: Arial, sans-serif;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 .founder-section {
   
   padding-top: 10px;
-  border-top: 1px solid #ccc;
+  border-top: 4px solid green;
   color:black;
 }
 .founder-info {
@@ -75,7 +75,7 @@ span{
 .founder-text p {
   font-size: 1.1rem;
   line-height: 1.6;
-  margin-top: 0;
+  margin-top: 20px;
   color: black;
 }
 </style>

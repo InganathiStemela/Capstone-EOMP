@@ -1,6 +1,6 @@
 <template>
     <div class="products">
-      <h1 class="display-1">PRODUCTS</h1>
+      <!-- <h1 class="display-1">PRODUCTS</h1>
       <div class="container mt-4">
         <div class="row">
           <div v-for="product in products" :key="product.ID" class="col-md-4">
@@ -15,13 +15,14 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 </template>
 
-<script>
+<!-- <script>
 import SpinnerComp from '../components/SpinnerComp.vue';
-import CardComp from '@/components/CardComp.vue';
+import CardComp from '../components/CardComp.vue';
+
 
 export default {
     components: {
@@ -33,11 +34,15 @@ export default {
     products() {
       return this.$store.state.products;
     },
-  },
+    product() {
+        return this.$store.state.product;
+      },
+    },
 
 
   mounted() {
     this.$store.dispatch('fetchProducts');
+    this.$store.dispatch('fetchProduct');
   },
 }
 
@@ -60,4 +65,4 @@ export default {
   background-color: black; 
   color: green;
 }
-</style>
+</style> -->

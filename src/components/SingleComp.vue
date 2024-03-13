@@ -1,6 +1,5 @@
 <template>
     <div>
-      <h2>Product Details</h2>
       <div v-if="product">
         <img :src="product.IMAGE" alt="">
         <h3>{{ product.NAME }}</h3>
@@ -17,10 +16,10 @@
         return this.$store.state.product;
       },
     },
-
     mounted() {
-    const ID = this.$route.params.ID;
+    const ID = +this.$route.params.ID;
     this.$store.dispatch("fetchProduct", ID);
+    console.log(this.product, ID);
   },
   };
   </script>

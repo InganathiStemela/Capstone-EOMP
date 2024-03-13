@@ -31,9 +31,21 @@
     width: 40%;
     margin: auto;
     border-radius: 8px;
-    border:1px solid green;
+    border:2px solid green;
     box-shadow: 4px 8px 0px green;
+    animation: pulse-border 3s infinite;
   }
+  @keyframes pulse-border {
+  0% {
+    border-color: green;
+  }
+  50% {
+    border-color: #45A049;
+  }
+  100% {
+    border-color: green;
+  }
+}
   .input-field,
   .textarea-field {
     width: 40%;
@@ -62,3 +74,5 @@
     font-weight: bold;
   }
   </style>
+  
+    

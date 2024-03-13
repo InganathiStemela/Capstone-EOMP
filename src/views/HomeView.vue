@@ -1,13 +1,12 @@
 <template>
   <div> 
     <div class="home">
-      <h1>NATURAL GLOW</h1>
+      <h1>NATURAL <br> GLOW</h1>
       <div class="img">
         <img src="https://i.postimg.cc/nhFvfwRv/Green-Watercolor-Instagram-Story-Background-1-removebg-preview.png" alt="">
       </div>
-      <div class="paragraph text-left">
-      <p>MADE WITH 100%</p>
-      <P>NATURAL INGREDIENTS</P>
+      <div class="paragraph">
+      <p class="inga"> MADE WITH 100% <br> NATURAL INGREDIENTS</p>
       </div>
     </div>
   </div>
@@ -29,13 +28,14 @@ export default {
 }
 
 h1 {
-  color: black;
+  color: white;
   font-weight: bolder;
   font-size: 100px;
   position: absolute;
   top: 50px;
   left: 50px;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .img {
@@ -54,14 +54,21 @@ h1 {
   }
 
   h1 {
-    margin-bottom: 0;
+    position: static;
+    text-align: center;
   }
 }
-.paragraph {
-  margin-top: auto; 
-  text-align: left;
+.inga {
+  margin-left: 850px; 
+  text-align: right;
+  color: white;
+  /* margin-top: -150px; */
 }
 
-
+@media (min-width: 768px) {
+  .inga {
+    margin-top: -10px;
+  }
+}
 
 </style>

@@ -34,6 +34,8 @@ import { createStore } from 'vuex';
 import axios from 'axios';
 
 export default {
+    components: {createStore,
+    axios},
   data() {
     return {
       USERNAME: '',
