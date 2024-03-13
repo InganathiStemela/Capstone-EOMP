@@ -14,7 +14,7 @@ class Users{
         })
     }
     fetchUser(req, res){
-        const qry = `SELECT  * FOM users WHERE ID = '${req.params.ID}';`
+        const qry = `SELECT  * FROM users WHERE ID = '${req.params.ID}';`
         db.query(qry, (err, results)=>{
             if(err) throw err
             res.json({
