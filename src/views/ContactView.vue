@@ -14,6 +14,16 @@
           <textarea name="message" class="textarea-field" placeholder="Please type your message" required="message"   oninvalid="this.setCustomValidity('Please Enter Your Message')"
           oninput="this.setCustomValidity('')"></textarea><br>
           <button type="submit" class="submit-button">Send</button>
+
+          <div class="social-media">
+			<span>
+				Get In Touch<i class="fas fa-long-arrow-alt-right"></i>
+			</span>
+			<a class="fab fa-facebook-f" href="https://www.facebook.com/inganathi.stemela/" target="blank_"></a>
+			<a class="fab fa-envelope" href="" target="blank_"></a>
+			<a class="fab fa-instagram" href="" target="blank_"></a>
+			<a class="fab fa-linkedin" href="https://www.linkedin.com/in/inganathi-stemela-5624362b6/" target="blank_"></a>
+		</div>
         </form>
       </div>
     </div>
@@ -30,6 +40,8 @@
   .container{
     width: 40%;
     margin: auto;
+    margin-top: 5%;
+    margin-bottom: 20%;
     border-radius: 8px;
     border:2px solid green;
     box-shadow: 4px 8px 0px green;
