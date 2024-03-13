@@ -5,6 +5,10 @@
       <div class="img">
         <img src="https://i.postimg.cc/nhFvfwRv/Green-Watercolor-Instagram-Story-Background-1-removebg-preview.png" alt="">
       </div>
+      <div class="paragraph text-left">
+      <p>MADE WITH 100%</p>
+      <P>NATURAL INGREDIENTS</P>
+      </div>
     </div>
   </div>
 </template>
@@ -53,4 +57,11 @@ h1 {
     margin-bottom: 0;
   }
 }
+.paragraph {
+  margin-top: auto; 
+  text-align: left;
+}
+
+
+
 </style>

@@ -1,114 +1,81 @@
 <template>
-  <div class="about">
-    <h1>Welcome to NATURAL GLOW</h1>
-    <p>
-      At NATURAL GLOW, we believe that skincare should be simple, effective, and rooted in the power of nature. Our journey began with a simple mission: to provide individuals with access to high-quality skincare products made from natural ingredients that nourish and rejuvenate the skin.
-    </p>
-    <div class="card-container">
-      <div class="card" style="width: 20rem;">
-  <div class="card-body">
-    <h5 class="card-title">Our Story</h5>
-    <p class="card-text">Founded by Inganathi Stemela, a passionate skincare enthusiast, NATURAL GLOW was born out of a desire to create a brand that prioritizes transparency, sustainability, and ethical practices. Drawing inspiration from the healing properties of botanicals and botanical extracts, we set out to develop a range of skincare solutions that harness the power of nature to promote healthy, radiant skin.</p>
-  </div>
-</div>
-</div>
-
-<div class="card-container">
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Our Commitment</h5>
-    <p class="card-text">At NATURAL GLOW, we are committed to using only the finest natural ingredients in our products. From soothing botanical extracts to nourishing plant oils, each ingredient is carefully selected for its proven benefits and safety profile. We believe in transparency and strive to provide our customers with full disclosure of our ingredient lists, ensuring peace of mind and trust in our formulations.</p>
-  </div>
-</div>
-</div>
-
-<div class="card-container">
-<div class="card" style="width: 20rem;">
-  <div class="card-body">
-    <h5 class="card-title">Our Values</h5>
-    <p class="card-text">We celebrate the beauty of nature and believe in harnessing its power to enhance skin health and vitality. We believe in transparency in all aspects of our business, from ingredient sourcing to product formulation. We are committed to minimizing our environmental footprint and implementing sustainable practices throughout our supply chain. We adhere to ethical standards and strive to make a positive impact on the communities and ecosystems that support us.</p>
-  </div>
-</div>
-</div>
-
-<div class="card-container">
-<div class="card" style="width: 20rem;">
-  <div class="card-body">
-    <h5 class="card-title">Our Promise</h5>
-    <p class="card-text">At NATURAL GLOW, we are dedicated to providing our customers with skincare products that deliver real results without compromising on quality or integrity. Whether you're looking to address specific skin concerns or simply enhance your natural beauty, we invite you to experience the transformative power of nature with NATURAL GLOW skincare.
-</p>
-  </div>
-</div>
-</div>
-<p>
-      Thank you for choosing NATURAL GLOW. Here's to healthy, radiant skin, naturally.
-    </p>
+  <div>
+  <div class="about-page">
+    <div class="container">
+      <h1 class="text-center fs-1">About Us</h1>
+      <p class="text-center">NATURAL GLOW is a skincare brand founded by Inganathi Stemela, focusing on providing high-quality products made from natural ingredients that nourish and rejuvenate the skin. The brand is committed to transparency, sustainability, and ethical practices, using only the finest natural ingredients. NATURAL GLOW values natural beauty, transparency, sustainability, and ethical practices. They aim to minimize their environmental footprint and make a positive impact on the communities and ecosystems that support them. The company promises to deliver real results without compromising on quality or integrity, addressing specific skin concerns or enhancing natural beauty.</p>
+      <div class="founder-section">
+        <h2 class="text-center">Meet the Founder</h2>
+        <div class="founder-info">
+          <div class="founder-image">
+            <img src="https://i.postimg.cc/jjp7HGR3/inga.jpg" alt="Founder - Inganathi Stemela" />
+          </div>
+          <div class="founder-text">
+            <p>Hello, I'm Inganathi Stemela, the founder of Natural Glow. <br>With a deep love for healthy, radiant skin,<br> I started this journey to provide skincare products<br> made from natural ingredients that nourish and rejuvenate the skin. <br>My goal is to create a brand that prioritizes transparency, sustainability and ethical practices!</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 </template>
 
+<script>
+import NavbarComp from '../components/NavbarComp.vue';
+import FooterComp from '../components/FooterComp.vue';
+
+export default {
+  name: 'AboutPage',
+  components:{
+    NavbarComp,
+    FooterComp
+  }
+};
+</script>
+
 <style scoped>
-
-
-.card-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 20px;
+/* @import url(''); */
+span{
+  background-color: #F4DAF0;
 }
-
-.card {
-  width: 100%;
-  border: 2px solid;
-  border-radius: 8px;
-  overflow: hidden; 
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.5);
-  flex: 0 1 auto;
+.about-page{
+  margin-top: 100px;
 }
-
-
-.card-title {
-  position: relative;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  cursor: pointer;
+.container{
+  color:black;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
 }
-
-.card-title::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 100%;
-  height: 2px;
-  background-color: green;
-  transform: scaleX(0);
-  transition: transform 0.3s ease-in-out;
-}
-
-.card-title:hover::after {
-  transform: scaleX(1);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.card-title {
-  animation: fadeInUp 0.5s forwards;
-}
-h1, p{
+.founder-section {
+  
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
   color:black;
 }
+.founder-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px;
+}
+.founder-image {
+  flex: 1;
+  max-width: 500px;
+  text-align: center;
+}
+.founder-image img {
+  max-width: 50%;
+  border: green;
+  border-radius: 30%;
+}
+.founder-text {
+  flex: 2;
+  text-align: left;
+}
+.founder-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 0;
+  color: black;
+}
 </style>
-
-
