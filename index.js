@@ -8,6 +8,13 @@ import path from 'path';
 const app = express()
 const port = +process.env.PORT || 6300
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080/');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
+
 app.use(
     express.static('./statics'),
     cors(),
