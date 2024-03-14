@@ -29,7 +29,7 @@
     </div>
   </template>
 
-<script>
+<!-- <script>
 import { createStore } from 'vuex';
 import axios from 'axios';
 
@@ -63,6 +63,40 @@ export default {
                 msg: 'You are registered',
             });
         });
+    }
+  }
+}
+</script> -->
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      USERNAME: '',
+      EMAIL: '',
+      PASSWORD: '',
+      saveAccount: false,
+      submitting: false,
+    };
+  },
+  methods: {
+    async register() {
+      this.submitting = true;
+      try {
+        const response = await axios.post('/api/register', {
+          USERNAME: this.USERNAME,
+          EMAIL: this.EMAIL,
+          PASSWORD: this.PASSWORD,
+          saveAccount: this.saveAccount
+        });
+        console.log(response.data); 
+              } catch (e) {
+        console.error('Error signing up:', e);
+      } finally {
+        this.submitting = false;
+      }
     }
   }
 }

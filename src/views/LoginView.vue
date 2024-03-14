@@ -21,13 +21,10 @@
     </div>
   </template>
 
-
-<script>
+<!-- <script>
 import axios from 'axios';
 
 export default {
-    components: { axios
-    },
   data() {
     return {
       EMAIL: '',
@@ -35,54 +32,66 @@ export default {
       loginError: '',
     };
   },
-//   methods: {
-//     login(req, res){
-//         const {EMAIL, PASSWORD} = req.body;
-        
-//         const qry = `SELECT * FROM users WHERE EMAIL = '${EMAIL}';`
-//         db.query(qry, async(err, results)=>{
-//             if(err) throw err
-//             if(!results?.length){
-//                 res.json({
-//                     status: res.statusCode,
-//                     msg: 'You provided wrong email address'
-//                 })
-//             }else{
-//                 const validPassword = await compare(PASSWORD, results[0].PASSWORD)
-//                 if(validPassword){
-//                     const token = createToken({
-//                         EMAIL,
-//                         PASSWORD
-//                     })
-//                 res.json({
-//                     status: res.statusCode,
-//                     msg: 'Welcome back!',
-//                     token,
-//                     result: results[0]
-//                 })
-//             }else{
-//                 res.json({
-//                     status: res.statusCode,
-//                     msg: 'Incorrect password'
-//                 })
-//             }
-//         }
-            
-//         })
-//     }
-//   }
 
   methods: {
     async login() {
-      const { EMAIL, PASSWORD } = this;
       try {
-        const response = await axios.post('/login', { EMAIL, PASSWORD });
-        console.log(response.data);
+        const response = await axios.post('/login', {
+          EMAIL: this.EMAIL,
+          PASSWORD: this.PASSWORD
+        });
+        const verifyToken = response.data.verifyToken;
+
+        localhost.setItem('verifyToken', verifyToken);
+
+        console.log('Login successful');
       } catch (error) {
-        console.error('Login failed:', error);
+        if (error.response && error.response.status === 401) {
+          this.loginError = 'Invalid email or password';
+        } else {
+          this.loginError = 'An error occurred while logging in';
+          console.error('Login failed:', error);
+        }
       }
     }
+  }
+}
+</script> -->
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      EMAIL: '',
+      PASSWORD: '',
+      loginError: '',
+    };
   },
+
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('/login', {
+          EMAIL: this.EMAIL,
+          PASSWORD: this.PASSWORD
+        });
+        const verifyToken = response.data.verifyToken;
+        localStorage.setItem('verifyToken', verifyToken);
+        this.$router.push('/home');
+
+        console.log('Login successful');
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          this.loginError = 'Invalid email or password';
+        } else {
+          this.loginError = 'An error occurred while logging in';
+          console.error('Login failed:', error);
+        }
+      }
+    }
+  }
 }
 </script>
 

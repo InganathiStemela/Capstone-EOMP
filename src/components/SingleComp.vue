@@ -17,7 +17,7 @@
       },
     },
     mounted() {
-    const ID = +this.$route.params.ID;
+    const ID = this.$route.params.ID;
     this.$store.dispatch("fetchProduct", ID);
     console.log(this.product, ID);
   },
