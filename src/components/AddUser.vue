@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
       <h2>Add User</h2>
       <input v-model="newUser.USERNAME" placeholder="USERNAME" />
@@ -16,9 +16,57 @@
         <button @click="deleteUser(user.ID)">Delete</button>
       </div>
     </div>
+  </template> -->
+
+
+  <template>
+    <div>
+      <h2>Add User</h2>
+      <table>
+        <tr>
+          <td>USERNAME:</td>
+          <td><input v-model="newUser.USERNAME" placeholder="USERNAME" /></td>
+        </tr>
+        <tr>
+          <td>EMAIL:</td>
+          <td><input v-model="newUser.EMAIL" placeholder="EMAIL" /></td>
+        </tr>
+        <tr>
+          <td>PASSWORD:</td>
+          <td><input v-model="newUser.PASSWORD" placeholder="PASSWORD" type="password" /></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button @click="registerUser">REGISTER USER</button></td>
+        </tr>
+      </table>
+      <hr />
+      <h2>Users</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>USERNAME</th>
+            <th>EMAIL</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="user in users" :key="user.ID">
+            <td>{{ user.USERNAME }}</td>
+            <td>{{ user.EMAIL }}</td>
+            <td>
+              <input v-model="updatedUsers[user.ID].USERNAME" placeholder="New USERNAME" />
+              <input v-model="updatedUsers[user.ID].EMAIL" placeholder="New EMAIL" />
+              <button @click="updateUser(user.ID)">UPDATE</button>
+              <button @click="deleteUser(user.ID)">DELETE</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </template>
   
-  <script>
+  
+  <!-- <script>
   import axios from "axios";
   
   export default {
@@ -91,5 +139,5 @@
   
   <style scoped>
  
-  </style>
+  </style> -->
   
