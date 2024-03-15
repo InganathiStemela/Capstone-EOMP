@@ -1,6 +1,8 @@
 <template>
   <div>
+    <h1>USERS</h1>
     <table class="table">
+      
       <thead>
         <tr>
           <th>ID</th>
@@ -33,6 +35,7 @@
       </tbody>
     </table>
 
+    <h1>PRODUCTS</h1>
     <table class="table">
       <thead>
         <tr>
@@ -44,6 +47,7 @@
           <th>ACTIONS</th>
         </tr>
       </thead>
+      
       <tbody>
         <tr v-for="product in products" :key="product.ID">
           <td>{{ product.ID }}</td>
@@ -123,7 +127,7 @@ async deleteUser(ID) {
       console.error("Error deleting user:", error);
     }
   }
-  this.$router.push("../views/AdminView.vue");
+  this.$router.push("/admin");
 },
 async updateProduct(product) {
       try {
@@ -145,7 +149,7 @@ async updateProduct(product) {
         console.error("Error deleting product:", error);
         }
       }
-      this.$router.push("../views/AdminView.vue");
+      this.$router.push("/admin");
     },
   },
   }
@@ -169,6 +173,9 @@ async updateProduct(product) {
   font-weight: bold;
   text-align: left;
 }
+.table tbody {
+  background-color: transparent;
+}
 
 .table tbody tr:nth-child(even) {
   background-color: #f2f2f2; 
@@ -181,5 +188,21 @@ async updateProduct(product) {
 .table img {
   width: 100px;
   height: auto; 
+}
+h1 {
+  text-shadow: 2px 2px green;
+  text-decoration: underline;
+  color: black;
+}
+@media screen and (max-width: 600px) {
+  .table {
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+  }
+  .table th,
+  .table td {
+    white-space: nowrap;
+  }
 }
 </style>

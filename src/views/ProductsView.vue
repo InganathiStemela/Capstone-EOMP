@@ -22,7 +22,14 @@
                 <h5 class="card-title">{{ product.NAME }}</h5>
                 <p class="card-text">Amount: {{ product.PRICE }}</p>
                 <p class="card-text">Category: {{ product.CATEGORY }}</p>
-                <router-link id="btn" :to="{name: 'product', params: {ID: product.ID}}">View More</router-link>
+                <router-link id="btn" :to="{name: 'product', params: {ID: product.ID},query:{
+                  NAME:product.NAME,
+                  CATEGORY:product.CATEGORY,
+                  IMAGE:product.IMAGE,
+                  PRICE:product.PRICE
+                }}">
+                  View More
+                </router-link>
               </div>
             </div>
           </div>
