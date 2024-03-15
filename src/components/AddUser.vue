@@ -91,7 +91,7 @@
         try {
           const response = await axios.get("http://localhost:3000/users");
           this.$store.commit("setUsers", response.data);
-          this.updatedUserData = response.data.reduce((acc, user) => {
+          this.updatedUsers = response.data.reduce((acc, user) => {
             acc[user.ID] = { USERNAME: user.USERNAME, EMAIL: user.EMAIL };
             return acc;
           }, {});

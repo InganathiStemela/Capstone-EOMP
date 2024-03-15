@@ -22,7 +22,7 @@ export default {
   methods: {
     async fetchProducts() {
       try {
-        const response = await axios.get("/products");
+        const response = await axios.get("http://localhost:3000/products");
         this.$store.commit("setProducts", response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -32,7 +32,7 @@ export default {
       const confirmed = confirm("Are you sure you want to delete this product?");
       if (confirmed) {
         try {
-          await axios.delete(`/products/${ID}`);
+          await axios.delete(`http://localhost:3000/products/${ID}`);
           console.log("Product deleted successfully!");
           this.fetchProducts();
         } catch (error) {
@@ -42,7 +42,7 @@ export default {
     },
     async updateProduct(ID) {
       try {
-        await axios.patch(`/products/${ID}`, this.updatedProduct); 
+        await axios.patch(`http://localhost:3000/products/${ID}`, this.updatedProduct); 
         console.log("Product updated successfully!");
         this.fetchProducts();
       } catch (error) {
