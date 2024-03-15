@@ -6,7 +6,7 @@ import cors from 'cors';
 import path from 'path';
 
 const app = express()
-const port = +process.env.PORT || 6300
+const port = +process.env.PORT || 3000
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080/');
