@@ -1,13 +1,14 @@
 <script>
 import axios from "axios";
 import AddUser from "../components/AddUser.vue";
-// import AddProduct from "../components/AddProduct.vue";
-// import { capstoneUrl } from "../store";
+import AddProduct from "../components/AddProduct.vue";
+import { capstoneUrl } from "../store";
 
 export default {
   name: "AdminTable",
-  components: { AddUser 
-    // AddProduct 
+  components: { AddUser,
+    AddProduct,
+    capstoneUrl
 },
   data() {
     return {
@@ -24,13 +25,13 @@ export default {
     },
   },
   mounted() {
-    this.fetchUsers();
+    this.setUsers();
     this.fetchProducts();
   },
   methods: {
-    async fetchUsers() {
+    async setUsers() {
       try {
-        const response = await axios.get("/users");
+        const response = await axios.get("http://localhost:3000/users");
         this.$store.commit("setUsers", response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -38,7 +39,7 @@ export default {
     },
     async fetchProducts() {
       try {
-        const response = await axios.get("/products");
+        const response = await axios.get("http://localhost:3000/products");
         this.$store.commit("setProducts", response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -48,7 +49,7 @@ export default {
       const confirmed = confirm("Are you sure you want to delete this user?");
       if (confirmed) {
         try {
-          await axios.delete(`/users/${ID}`);
+          await axios.delete(`http://localhost:3000/users/${ID}`);
           console.log("User deleted successfully!");
           this.fetchUsers();
         } catch (error) {
@@ -60,7 +61,7 @@ export default {
       const confirmed = confirm("Are you sure you want to delete this product?");
       if (confirmed) {
         try {
-          await axios.delete(`/products/${ID}`);
+          await axios.delete(`http://localhost:3000/products/${ID}`);
           console.log("Product deleted successfully!");
           this.fetchProducts();
         } catch (error) {
@@ -70,7 +71,7 @@ export default {
     },
     async updateUser(ID) {
       try {
-        await axios.patch(`/users/${ID}`, this.updatedUser); 
+        await axios.patch(`http://localhost:3000/users/${ID}`, this.updatedUser); 
         console.log("User updated successfully!");
         this.fetchUsers();
       } catch (error) {
@@ -79,7 +80,7 @@ export default {
     },
     async updateProduct(ID) {
       try {
-        await axios.patch(`/products/${ID}`, this.updatedProduct); 
+        await axios.patch(`http://localhost:3000/products/${ID}`, this.updatedProduct); 
         console.log("Product updated successfully!");
         this.fetchProducts();
       } catch (error) {

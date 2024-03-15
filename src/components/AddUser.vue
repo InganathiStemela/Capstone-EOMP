@@ -64,9 +64,7 @@
       </table>
     </div>
   </template>
-  
-  
-  <!-- <script>
+  <script>
   import axios from "axios";
   
   export default {
@@ -91,7 +89,7 @@
     methods: {
       async fetchUsers() {
         try {
-          const response = await axios.get("/users");
+          const response = await axios.get("http://localhost:3000/users");
           this.$store.commit("setUsers", response.data);
           this.updatedUserData = response.data.reduce((acc, user) => {
             acc[user.ID] = { USERNAME: user.USERNAME, EMAIL: user.EMAIL };
@@ -103,7 +101,7 @@
       },
       async registerUser() {
         try {
-          await axios.post("/users", this.newUser);
+          await axios.post("http://localhost:3000/users", this.newUser);
           console.log("User registered successfully!");
           this.newUser = { USERNAME: "", EMAIL: "", PASSWORD: "" };
           this.fetchUsers();
@@ -114,7 +112,7 @@
       async updateUser(ID) {
         try {
           const userData = this.updatedUsers[ID];
-          await axios.patch(`/users/${ID}`, userData);
+          await axios.patch(`http://localhost:3000/users/${ID}`, userData);
           console.log("User updated successfully!");
           this.fetchUsers();
         } catch (error) {
@@ -125,7 +123,7 @@
         const confirmed = confirm("Are you sure you want to delete this user?");
         if (confirmed) {
           try {
-            await axios.delete(`/users/${ID}`);
+            await axios.delete(`http://localhost:3000/users/${ID}`);
             console.log("User deleted successfully!");
             this.fetchUsers();
           } catch (error) {
@@ -135,9 +133,9 @@
       },
     },
   };
-  </script>
+</script>
+
   
   <style scoped>
  
-  </style> -->
-  
+  </style>
