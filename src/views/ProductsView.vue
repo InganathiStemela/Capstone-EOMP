@@ -4,6 +4,13 @@
       <h1 class="display-1">PRODUCTS</h1>
       <form class="d-flex" role="search">
         <input v-model="searchQuery" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <select v-model="selectedCategory" class="form-select me-2" aria-label="Category">
+          <option value="">All Categories</option>
+          <option value="cleanser">Cleanser</option>
+          <option value="serum/wash">Serum/Wash</option>
+          <option value="balm">Balm</option>
+          <option value="face mask/cream">Face Mask/Cream</option>
+        </select>
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
       <div class="container mt-4">
@@ -39,37 +46,36 @@
 
  export default {
   components: {SpinnerComp ,CardComp, SingleComp},
-  //  props: {
-  //    product: Object
-  //  },
    data() {
      return {
       searchQuery: '',
+      selectedCategory: '',
        selectedProduct: null,
      };
    },
-  //  watch: {
-  //    product: {
-  //      immediate: true,
-  //      handler(newVal) {
-  //        this.selectedProduct = newVal;
-  //      },
-  //    },
-  //  },
-   
-  //  props: {
-  //    products: Array,
-  //  },
    computed: {
      products() {
        return this.$store.state.products || [];
      },
-     filteredProducts() {
+  filteredProducts() {
+      let filtered = this.products;
       const query = this.searchQuery.toLowerCase();
-       return this.products.filter(product =>
-       product.NAME.toLowerCase().includes(query));
-     },
-   },
+      const category = this.selectedCategory.toLowerCase();
+
+      if (query) {
+        filtered = filtered.filter(product => product.NAME.toLowerCase().includes(query));
+      }
+      if (category) {
+        filtered = filtered.filter(product => product.CATEGORY.toLowerCase() === category);
+      }
+      return filtered;
+    },
+    uniqueCategories() {
+      const categories = new Set();
+      this.products.forEach(product => categories.add(product.CATEGORY));
+      return Array.from(categories);
+    },
+  },
    mounted() {
      this.$store.dispatch('fetchProducts');
      this.$store.dispatch('fetchProduct');
