@@ -38,7 +38,7 @@ usersRouter.patch('/update/:ID', bodyParser.json(), (req, res)=>{
         })
     }
 })
-usersRouter.delete('/delete/:ID', bodyParser.json(), (req, res)=>{
+usersRouter.delete('/:ID', bodyParser.json(), (req, res)=>{
     try{
         users.deleteUser(req, res)
     }catch(e){
