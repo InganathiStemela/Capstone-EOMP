@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div>
+      <div class="card">
         <img :src="$route.query.IMAGE" alt="">
         <h3>{{ $route.query.NAME }}</h3>
         <h4>{{ $route.query.PRICE }}</h4>
@@ -34,3 +34,15 @@
   },
 };
   </script>
+
+  <style scoped>
+.card{
+  width: 20%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 20%;
+    border-radius: 8px;
+    border:2px solid green;
+    box-shadow: 4px 8px 0px green;
+}
+</style>

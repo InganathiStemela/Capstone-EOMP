@@ -1,8 +1,17 @@
 <template>
   <div>
     <h1>USERS</h1>
+    <button @click="showUserForm">Add User</button>
+    <form v-if="showForm" @submit.prevent="addUser">
+      <label for="username">Username:</label>
+      <input type="text" id="username" v-model="newUser.USERNAME" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" v-model="newUser.EMAIL" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" v-model="newUser.PASSWORD" required>
+      <button type="submit">Submit</button>
+    </form>
     <table class="table">
-      
       <thead>
         <tr>
           <th>ID</th>
@@ -83,6 +92,16 @@ import { capstoneUrl } from "../store/index.js";
 export default {
   name: "AdminTable",
  components: { capstoneUrl },
+ data() {
+    return {
+      showForm: false,
+      newUser: {
+        USERNAME: '',
+        EMAIL: '',
+        PASSWORD: ''
+      }
+    };
+  },
   computed: {
     users() {
       return this.$store.state.users
@@ -94,14 +113,32 @@ export default {
   mounted() {
     this.$store.dispatch("fetchUsers");
     this.$store.dispatch('fetchProducts');
-    // this.$store.dispatch('UpdateProduct');
   },
   methods: {
+    showUserForm() {
+      this.showForm = true;
+    },
+    async addUser() {
+      try {
+        const response = await axios.post("http://localhost:3000/users/register", this.newUser);
+        console.log("User added successfully:", response.data);
+        this.newUser = {
+          USERNAME: '',
+          EMAIL: '',
+          PASSWORD: ''
+        };
+        this.showForm = false;
+        this.fetchUsers();
+      } catch (error) {
+        console.error('Error adding user:', error);
+      }
+    },
     async fetchUsers() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/users"
+          "http://localhost:3000/users/"
         );
+        console.log("Response data:", response.data);
         this.$store.commit("setUsers", response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -109,14 +146,14 @@ export default {
     },
     async updateUser(user) {
       try {
-        await axios.patch(`http://localhost:3000/users/${user.ID}`, user);
+        await axios.patch(`http://localhost:3000/users/register/:${user.ID}`, user);
         console.log("User updated successfully!");
         this.fetchUsers();
       } catch (error) {
         console.error("Error updating user:", error);
       }
     },
-async deleteUser(ID) {
+async deleteUser() {
   const confirmed = confirm("Are you sure you want to delete this user?");
   if (confirmed) {
     try {
@@ -138,11 +175,11 @@ async updateProduct(product) {
         console.error("Error updating product:", error);
       }
     },
-    async deleteProduct(ID) {
+    async deleteProduct() {
     const confirmed = confirm("Are you sure you want to delete this product?");
       if (confirmed) {
         try   {
-          await this.$store.delete(`http://localhost:3000/users/${products.ID}`);
+          await this.$store.delete(`http://localhost:3000/products/${products.ID}`);
           console.log("Product deleted successfully!");
           this.fetchProducts();
         } catch (error) {

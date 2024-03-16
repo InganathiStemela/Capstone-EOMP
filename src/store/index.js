@@ -7,7 +7,7 @@ export default createStore({
   state: {
     products: null,
     product: null,
-    users: [],
+    users: null,
   },
   getters: {
   },
@@ -43,13 +43,13 @@ export default createStore({
         context.commit("setMsg", "An error occurred.");
       }
     },
-    async fetchUsers({ commit }) {
+    async fetchUsers(context) {
       try {
-        const response = await axios.get("http://localhost:3000/users");
-        commit("setUsers", response.data); 
+        const response = await axios.get("http://localhost:3000/users/");
+        context.commit("setUsers", response.data); 
+        console.log(response.data);
       } catch (error) {
-        console.error("Error fetching users:", error);
-        throw error; 
+        console.error("Error fetching users:", error); 
       }
     }
   },
