@@ -23,6 +23,12 @@ export default createStore({
     },
     setUsers(state, users){
       state.users = users;
+    },
+    addUserToState(state, newUser) {
+      state.users.push(newUser);
+    },
+    removeUser(state, ID) {
+      state.users = state.users.filter(user => user.ID !== ID);
     }
   },
   actions: {
@@ -45,11 +51,30 @@ export default createStore({
     },
     async fetchUsers(context) {
       try {
-        const response = await axios.get("http://localhost:3000/users/");
-        context.commit("setUsers", response.data); 
-        console.log(response.data);
+        const {data} = await axios.get(`${capstoneUrl}users`)
+        context.commit("setUsers", data.results)
+        console.log(data.results);
       } catch (error) {
         console.error("Error fetching users:", error); 
+      }
+    },
+    async addUser(context, newUser) {
+      try {
+        const response = await axios.post(`${capstoneUrl}users/register`, newUser);
+        context.commit("addUser", response.data);
+        console.log("User added successfully!");
+      } catch (error) {
+        console.error("Error adding user:", error);
+        throw error;
+      }
+    },
+    async deleteUser(context, ID) {
+      try {
+        await axios.delete(`${capstoneUrl}users/${ID}`);
+        context.commit("removeUser", ID);
+        console.log("User deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting user:", error);
       }
     }
   },

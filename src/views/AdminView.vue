@@ -119,20 +119,24 @@ export default {
       this.showForm = true;
     },
     async addUser() {
-      try {
-        const response = await axios.post("http://localhost:3000/users/register", this.newUser);
-        console.log("User added successfully:", response.data);
-        this.newUser = {
-          USERNAME: '',
-          EMAIL: '',
-          PASSWORD: ''
-        };
-        this.showForm = false;
-        this.fetchUsers();
-      } catch (error) {
-        console.error('Error adding user:', error);
-      }
-    },
+  try {
+    const response = await axios.post("https://capstone-eomp-6qsh.onrender.com/users/register", {
+      USERNAME: this.newUser.USERNAME,
+      EMAIL: this.newUser.EMAIL,
+      PASSWORD: this.newUser.PASSWORD
+    });
+    console.log("User added successfully:", response.data);
+    this.newUser = {
+      USERNAME: '',
+      EMAIL: '',
+      PASSWORD: ''
+    };
+    this.showForm = false;
+    this.fetchUsers();
+  } catch (error) {
+    console.error('Error adding user:', error);
+  }
+},
     async fetchUsers() {
       try {
         const response = await axios.get(
@@ -146,20 +150,19 @@ export default {
     },
     async updateUser(user) {
       try {
-        await axios.patch(`http://localhost:3000/users/update/:${user.ID}`, user);
+        await axios.patch(`updateUser`, user);
         console.log("User updated successfully!");
         this.fetchUsers();
       } catch (error) {
         console.error("Error updating user:", error);
       }
     },
-async deleteUser() {
+async deleteUser(ID) {
   const confirmed = confirm("Are you sure you want to delete this user?");
   if (confirmed) {
     try {
-      await this.$store.delete(`http://localhost:3000/users/:${user.ID}`);
+      await this.$store.dispatch(`deleteUser`, ID);
       console.log("User deleted successfully!");
-      this.fetchUsers();
     } catch (error) {
       console.error("Error deleting user:", error);
     }
