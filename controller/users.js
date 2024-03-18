@@ -28,15 +28,9 @@ usersRouter.post('/login', bodyParser.json(), (req, res)=>{
         })
     }
 })
-usersRouter.patch('/update/:ID', bodyParser.json(), (req, res)=>{
-    try{
-        users.updateUser(req, res)
-    }catch(e){
-        res.json({
-            status: res.statusCode,
-            msg: 'Failed to update a user'
-        })
-    }
+usersRouter.patch('/users/:ID', bodyParser.json(),
+ (req, res)=>{
+    users.updateUser(req,res)
 })
 usersRouter.delete('/:ID', bodyParser.json(), (req, res)=>{
     try{

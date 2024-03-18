@@ -76,28 +76,31 @@ class Users{
             
         })
     }
-    async updateUser(req, res){
+    updateUser(req, res) {
         const data = req.body;
-        if(data?.password){
-            data.password = await hash(data.password, 9)
+        if (data.PASSWORD) {
+          data.PASSWORD = hash(data.PASSWORD, 15);
         }
-        
-        const qry = `UPDATE users SET ? WHERE  ID = ${req.params.ID};`
-        db.query(qry, [data], (err)=>{
-            if(err){
+        const query = `
+            UPDATE users
+            SET ?
+            WHERE ID = ?
+            `;
+        db.query(query, [data, req.params.ID], (err) => {
+            if (err) {
+                console.error('Error updating user:', err);
+                res.status(500).json({
+                    status: 500,
+                    msg: 'Failed to update user record.'
+                });
+            } else {
                 res.json({
                     status: res.statusCode,
-                    msg: 'Failed to update'
-                })
-            }else{
-                res.json({
-                    status: res.statusCode,
-                    msg: 'User successfully updated'
-                })
+                    msg: 'The user record was updated.'
+                });
             }
-            
-        })
-    }
+        });
+      }
     logout(req, res) {
         req.session.destroy((err) => {
             if (err) {
