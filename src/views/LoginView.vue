@@ -66,33 +66,31 @@ export default {
     return {
       EMAIL: '',
       PASSWORD: '',
-      loginError: '',
+      loginError: ''
     };
   },
-
   methods: {
     async login() {
       try {
-        const response = await axios.post('/login', {
+        const response = await axios.post('http://localhost:3000/users/login', {
           EMAIL: this.EMAIL,
           PASSWORD: this.PASSWORD
         });
-        const verifyToken = response.data.verifyToken;
-        localStorage.setItem('verifyToken', verifyToken);
-        this.$router.push('/home');
-
-        console.log('Login successful');
+        const token = response.data.token;
+        document.cookie = `token=${token}; path=/`;
+        alert('Login successful!');
+        console.log(response.data);
+        console.log("Email:", this.EMAIL);
+            console.log("Password:", this.PASSWORD);
       } catch (error) {
-        if (error.response && error.response.status === 401) {
-          this.loginError = 'Invalid email or password';
-        } else {
-          this.loginError = 'An error occurred while logging in';
-          console.error('Login failed:', error);
-        }
+        console.error('Error logging in:', error);
+        alert('An error occurred during login. Please try again later.');
       }
+      this.$router.push("/");
     }
+    
   }
-}
+};
 </script>
 
 

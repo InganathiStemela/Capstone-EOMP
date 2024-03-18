@@ -8,6 +8,7 @@ export default createStore({
     products: null,
     product: null,
     users: null,
+    token: null,
   },
   getters: {
   },
@@ -24,13 +25,22 @@ export default createStore({
     setUsers(state, users){
       state.users = users;
     },
-    addUserToState(state, newUser) {
+    addUser(state, newUser) {
       state.users.push(newUser);
     },
     removeUser(state, ID) {
       state.users = state.users.filter(user => user.ID !== ID);
-    }
-  },
+    },
+    updateUser(state, ID) {
+        state.users = state.users.filter(user => user.ID !== ID);
+      },
+      submitForm(state) {
+        state.users.push();
+      },
+      addToCart(state, newItem) {
+        state.cart.push(newItem);
+      }
+    },
   actions: {
     async fetchProducts(context) {
       try{
@@ -76,9 +86,35 @@ export default createStore({
       } catch (error) {
         console.error("Error deleting user:", error);
       }
+    },
+    async updateUser(context, ID) {
+      try {
+        await axios.patch(`${capstoneUrl}users/${ID}`);
+        console.log("User updated successfully!");
+        context.dispatch('fetchUsers');
+      } catch (error) {
+        console.error("Error updating user:", error);
+      }
     }
   },
-  
+  async deleteProduct(context, ID) {
+    try {
+      await axios.delete(`${capstoneUrl}products/${ID}`);
+      context.commit("removeProduct", ID);
+      console.log("Product deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  },
+  async addToCart({ commit }, newItem) {
+    try {
+      commit('addToCart', newItem);
+      return { success: true, message: 'Item added to cart successfully' };
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+      throw error;
+    }
+  },
   modules: {
   }
 }

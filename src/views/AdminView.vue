@@ -148,15 +148,15 @@ export default {
         console.error("Error fetching users:", error);
       }
     },
-    async updateUser(user) {
-      try {
-        await axios.patch(`updateUser`, user);
-        console.log("User updated successfully!");
-        this.fetchUsers();
-      } catch (error) {
-        console.error("Error updating user:", error);
-      }
-    },
+    async updateUser(ID) {
+  try {
+    const response = await axios.patch(`https://capstone-eomp-6qsh.onrender.com/users/${ID}`);
+    console.log("User updated successfully:", response.data);
+    this.fetchUsers();
+  } catch (error) {
+    console.error("Error updating user:", error);
+  }
+},
 async deleteUser(ID) {
   const confirmed = confirm("Are you sure you want to delete this user?");
   if (confirmed) {

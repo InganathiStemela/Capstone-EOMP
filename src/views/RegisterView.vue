@@ -4,10 +4,10 @@
         <h1 class="display-1 text-center">
           <span class="underline">SIGN UP</span>
         </h1>
-        <form class="p-3 rounded" @submit.prevent="postUser">
+        <form class="p-3 rounded" @submit.prevent="register">
           <div class="mb-3 row">
             <div class="col">
-              <input v-model="USERNAME" type="text" class="form-control" placeholder="First Name" required>
+              <input v-model="USERNAME" type="text" class="form-control" placeholder="UserName" required>
             </div>
           </div>
           <div class="mb-3">
@@ -77,7 +77,6 @@ export default {
       USERNAME: '',
       EMAIL: '',
       PASSWORD: '',
-      saveAccount: false,
       submitting: false,
     };
   },
@@ -85,15 +84,15 @@ export default {
     async register() {
       this.submitting = true;
       try {
-        const response = await axios.post('/api/register', {
+        const response = await axios.post('http://localhost:3000/users/register', {
           USERNAME: this.USERNAME,
           EMAIL: this.EMAIL,
           PASSWORD: this.PASSWORD,
-          saveAccount: this.saveAccount
         });
         console.log(response.data); 
-              } catch (e) {
-        console.error('Error signing up:', e);
+        this.$router.push('/');
+              } catch (err) {
+        console.error('Error signing up:', err);
       } finally {
         this.submitting = false;
       }
