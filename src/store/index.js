@@ -5,12 +5,24 @@ let capstoneUrl = "https://capstone-eomp-6qsh.onrender.com/";
 
 export default createStore({
   state: {
-    products: null,
-    product: null,
-    users: null,
+    products: [],
+    product:[],
+    cartItems: [],
+    users: [],
     token: null,
+    loginError: null,
+    registrationError: null,
+    // isAdmin: false
   },
   getters: {
+    allProducts: state => state.products,
+    allusers: state => state.users,
+    getSingleProduct: state => state.product,
+    isLoggedIn: state => !!state.token,
+    // isAdmin: state => state.isAdmin,
+    cartItems(state) {
+      return state.cartItems;
+    }
   },
   mutations: {
     setProducts(state, products){
@@ -31,15 +43,27 @@ export default createStore({
     removeUser(state, ID) {
       state.users = state.users.filter(user => user.ID !== ID);
     },
-    updateUser(state, ID) {
-        state.users = state.users.filter(user => user.ID !== ID);
-      },
+    updateUser(state, ID)  {
+      const index = state.users.findIndex(user => user.ID === editedUser.ID);
+      if (index !== -1) {
+        state.users.splice(index, 1, editedUser);
+      }
+    },
       submitForm(state) {
         state.users.push();
       },
-      addToCart(state, newItem) {
-        state.cart.push(newItem);
-      }
+      removeFromCart(state, index) {
+        state.cartItems.splice(index, 1);
+      },
+      addToCart(state, product) {
+        state.cartItems.push(product);
+      },
+      // setIsAdmin(state, isAdmin) {
+      //   state.isAdmin = isAdmin;
+      // },
+      clearCart(state) {
+        state.cartItems = [];
+      },
     },
   actions: {
     async fetchProducts(context) {
@@ -95,8 +119,7 @@ export default createStore({
       } catch (error) {
         console.error("Error updating user:", error);
       }
-    }
-  },
+    },
   async deleteProduct(context, ID) {
     try {
       await axios.delete(`${capstoneUrl}products/${ID}`);
@@ -106,15 +129,41 @@ export default createStore({
       console.error("Error deleting product:", error);
     }
   },
-  async addToCart({ commit }, newItem) {
+    // async addToCart(context, cartItems) {
+    //   try {
+    //     const response = await axios.post(`/addtocart`, cartItems);
+    //     context.commit("addToCart", response.data);
+    //     console.log("Product added to cart successfully!");
+    //   } catch (error) {
+    //     console.error("Error adding to cart", error);
+    //     throw error;
+    //   }
+    // },
+    addToCart({commit}, product) {
+      commit('addToCart', product)
+    },
+  async removeFromCart({ commit }) {
     try {
-      commit('addToCart', newItem);
-      return { success: true, message: 'Item added to cart successfully' };
+      await axios.delete(`${capstoneUrl}/addToCart`, product);
+      commit('removeFromCart', index);
     } catch (error) {
-      console.error('Error adding item to cart:', error);
-      throw error;
+      console.error('Error removing item from cart:', error);
+      throw error; 
     }
   },
+  async checkout({ state, commit }) {
+    try {
+      const order = {
+        products: state.cartItems,
+      };
+      const response = await axios.post('/checkout', order);
+      commit('clearCart');
+      console.log('Order placed successfully:', response.data);
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    }
+  }
+},
   modules: {
   }
 }

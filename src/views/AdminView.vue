@@ -7,6 +7,8 @@
       <input type="text" id="username" v-model="newUser.USERNAME" required>
       <label for="email">Email:</label>
       <input type="email" id="email" v-model="newUser.EMAIL" required>
+      <label for="email">UserRole:</label>
+      <input type="email" id="userrole" v-model="newUser.USERROLE" required>
       <label for="password">Password:</label>
       <input type="password" id="password" v-model="newUser.PASSWORD" required>
       <button type="submit">Submit</button>
@@ -17,6 +19,7 @@
           <th>ID</th>
           <th>USERNAME</th>
           <th>EMAIL</th>
+          <th>USERROLE</th>
           <th>ACTIONS</th>
         </tr>
       </thead>
@@ -25,6 +28,7 @@
           <td>{{ user.ID }}</td>
           <td>{{ user.USERNAME }}</td>
           <td>{{ user.EMAIL }}</td>
+          <td>{{ user.USERROLE }}</td>
           <td>
             <button @click="updateUser(user)">
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

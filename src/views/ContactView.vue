@@ -3,7 +3,7 @@
 
       <h1>CONTACT US</h1>
       <div class="form">
-        <form action="" method="POST">
+        <form action="https://formspree.io/f/moqgnwzr" method="POST">
           <label for="name">Name:</label><br>
           <input type="text" class="input-field" req placeholder="Please enter your Name" required="name"  oninvalid="this.setCustomValidity('Please Enter Your Name')"
           oninput="this.setCustomValidity('')"><br>

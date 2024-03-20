@@ -77,6 +77,7 @@ export default {
           PASSWORD: this.PASSWORD
         });
         const token = response.data.token;
+        $cookies.set('login', token)
         document.cookie = `token=${token}; path=/`;
         alert('Login successful!');
         console.log(response.data);

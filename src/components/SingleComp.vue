@@ -6,7 +6,7 @@
         <h4>{{ $route.query.PRICE }}</h4>
         <p>Category: {{ $route.query.CATEGORY }}</p>
     
-        <button @click="addToCart">Add to Cart</button>
+        <button @click="addToCart(product)">Add to Cart</button>
       </div>
     </div>
   </template>
@@ -33,24 +33,11 @@
     this.$store.dispatch("fetchProduct", ID);
   },
   methods: {
-    async addToCart() {
-    try {
-      if (this.product && this.product.NAME && this.product.PRICE){
-      const newItem = {
-        ID: this.$route.params.ID,
-        NAME: this.product.NAME,
-        QUANTITY: 1,
-        PRICE: this.product.PRICE,
-  
-      };
-      const response = await this.$store.dispatch('addToCart', newItem);
-      console.log(response);
-    } else {
-      console.error('Product data is undefined or missing required properties');
-    }
-    } catch (error) {
-      console.error('Error adding item to cart:', error);
-    }
+    async addToCart(product) {
+      console.log(product);
+      this.$store.dispatch('addToCart', product);
+      alert('Product added to cart');
+    this.$router.push("/addtocart");
   }
   }
 };
@@ -64,6 +51,5 @@
     margin-bottom: 20%;
     border-radius: 8px;
     border:2px solid green;
-    box-shadow: 4px 8px 0px green;
 }
 </style>

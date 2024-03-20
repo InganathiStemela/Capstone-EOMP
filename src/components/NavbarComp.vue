@@ -10,6 +10,12 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
+          <a class="nav-link" href="register">REGISTER</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">LOGIN<i class="ri-login-circle-fill"></i></a>
+        </li>
+        <li class="nav-item">
             <router-link class="nav-link" to="/">HOME</router-link>
         </li>
         <li class="nav-item">
@@ -19,19 +25,13 @@
             <router-link class="nav-link" to="/products">PRODUCTS</router-link>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/addtocart">CART</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/checkout">CHECKOUT</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/admin">ADMIN</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/checkout">CHECKOUT</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="register">REGISTER</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">LOGIN<i class="ri-login-circle-fill"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/contact">CONTACT</a>
