@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import {errHandling} from './middleware/errorHandling.js';
 import cors from 'cors';
 import path from 'path';
+import { addToCartRouter } from './controller/addToCart.js';
 
 const app = express()
 const port = +process.env.PORT || 3000
@@ -31,6 +32,7 @@ app.get('^/$|/naturalglow', (req, res)=>{
 
 app.use('/users', usersRouter)
 app.use('/products', productRouter)
+app.use('/addToCart', addToCartRouter)
 app.use(errHandling)
 
 app.listen(port, () => {
