@@ -4,6 +4,17 @@ import { addToCart } from '../models/index.js'; // Assuming you have a module fo
 
 const addToCartRouter = express.Router();
 
+
+addToCartRouter.get('/', (req, res)=>{
+    try{
+        addToCart.fetchCartProduct(req, res)
+    }catch(e){
+        res.json({
+            status: res.statusCode,
+            msg: 'Failed to retrieve product'
+        })
+    }
+})
 addToCartRouter.post('/addToCart', bodyParser.json(), (req, res)=>{
     addToCart.addToCart(req, res)
 })

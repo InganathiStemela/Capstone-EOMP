@@ -1,6 +1,16 @@
 import {connection as db} from '../config/config.js';
 
 class AddToCart {
+    fetchCartProduct(req, res){
+        const qry = `SELECT * FROM addToCart;`
+        db.query(qry, (err, results)=>{
+            if(err) throw err
+            res.json({
+                status: res.statusCode,
+                results
+            })
+        })
+    }
     addToCart(req, res) {
         const qry = `INSERT INTO addToCart SET ?;`;
         db.query(qry, [req.body], (err) => {
