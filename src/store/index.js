@@ -20,9 +20,10 @@ export default createStore({
     getSingleProduct: state => state.product,
     isLoggedIn: state => !!state.token,
     // isAdmin: state => state.isAdmin,
-    cartItems(state) {
-      return state.cartItems;
-    }
+    // cartItems(state) {
+    //   return state.cartItems;
+    // }
+    cartItems: state => state.product
   },
   mutations: {
     setProducts(state, products){
@@ -56,7 +57,7 @@ export default createStore({
         state.cartItems.splice(index, 1);
       },
       addToCart(state, product) {
-        state.cartItems.push(product);
+        state.addToCart.push(product);
       },
       // setIsAdmin(state, isAdmin) {
       //   state.isAdmin = isAdmin;
@@ -139,8 +140,18 @@ export default createStore({
     //     throw error;
     //   }
     // },
-    addToCart({commit}, product) {
-      commit('addToCart', product)
+    // addToCart({commit}, product) {
+    //   commit('addToCart', product)
+    // },
+    async addToCart(context, product) {
+      try {
+        const response = await axios.post(`${capstoneUrl}/addToCart/addToCart`, product);
+        context.commit("addToCart", response.data);
+        console.log("Product added to cart successfully!");
+      } catch (error) {
+        console.error("Error adding product:", error);
+        throw error;
+      }
     },
   async removeFromCart({ commit }) {
     try {

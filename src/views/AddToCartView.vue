@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr v-for="(product, index) in cartItems" :key="index">
-          <td>{{ product.ID }}</td>
+          <!-- <td>{{ product.ID }}</td> -->
           <td>{{ product.NAME }}</td>
           <td><img :src="product.IMAGE" :alt="product.NAME" /></td>
           <td>{{ product.QUANTITY }}</td>
@@ -36,7 +36,7 @@
 export default {
   computed: {
     cartItems() {
-      return this.$store.getters.cartItems;
+      return this.$store.getters.cartItems || [];
     }
   },
   methods: {
@@ -54,7 +54,7 @@ export default {
     goBack() {
     },
     calculateSubtotal() {
-      return this.cartItems.reduce((total, cartItems) => total + cartItems.amount, 0);
+      return this.cartItems.reduce((total, cartItems) => total + cartItems.PRICE, 0);
     }
   }
 };
