@@ -12,17 +12,12 @@ export default createStore({
     token: null,
     loginError: null,
     registrationError: null,
-    // isAdmin: false
   },
   getters: {
     allProducts: state => state.products,
     allusers: state => state.users,
     getSingleProduct: state => state.product,
     isLoggedIn: state => !!state.token,
-    // isAdmin: state => state.isAdmin,
-    // cartItems(state) {
-    //   return state.cartItems;
-    // }
     cartItems: state => state.product
   },
   mutations: {
@@ -59,11 +54,11 @@ export default createStore({
       addToCart(state, product) {
         state.addToCart.push(product);
       },
-      // setIsAdmin(state, isAdmin) {
-      //   state.isAdmin = isAdmin;
-      // },
       clearCart(state) {
         state.cartItems = [];
+      },
+      setCartItems(state, cartItems) {
+        state.cartItems = cartItems;
       },
     },
   actions: {
@@ -130,22 +125,19 @@ export default createStore({
       console.error("Error deleting product:", error);
     }
   },
-    // async addToCart(context, cartItems) {
-    //   try {
-    //     const response = await axios.post(`/addtocart`, cartItems);
-    //     context.commit("addToCart", response.data);
-    //     console.log("Product added to cart successfully!");
-    //   } catch (error) {
-    //     console.error("Error adding to cart", error);
-    //     throw error;
-    //   }
-    // },
-    // addToCart({commit}, product) {
-    //   commit('addToCart', product)
-    // },
+    async fetchCartProducts(context) {
+      try {
+        const {data} = await axios.get(`${capstoneUrl}addToCart`);
+        context.commit('setCartItems', data.results);
+        console.log(data.results);
+      } catch (error) {
+        console.error('Error fetching cart products:', error);
+        throw error;
+      }
+    },
     async addToCart(context, product) {
       try {
-        const response = await axios.post(`${capstoneUrl}/addToCart/addToCart`, product);
+        const response = await axios.post(`${capstoneUrl}addToCart/addToCart`, product);
         context.commit("addToCart", response.data);
         console.log("Product added to cart successfully!");
       } catch (error) {
@@ -155,7 +147,7 @@ export default createStore({
     },
   async removeFromCart({ commit }) {
     try {
-      await axios.delete(`${capstoneUrl}/addToCart`, product);
+      await axios.delete(`${capstoneUrl}addToCart/`, product);
       commit('removeFromCart', index);
     } catch (error) {
       console.error('Error removing item from cart:', error);
@@ -167,7 +159,7 @@ export default createStore({
       const order = {
         products: state.cartItems,
       };
-      const response = await axios.post('/checkout', order);
+      const response = await axios.post('/addToCart', order);
       commit('clearCart');
       console.log('Order placed successfully:', response.data);
     } catch (error) {

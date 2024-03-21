@@ -28,17 +28,16 @@
     }
   },
   mounted() {
-    const ID = this.$route.params.ID;
-    console.log('Initial ID:', ID);
-    this.$store.dispatch("fetchProduct", ID);
+    this.fetchCartProducts(this.$route.params.ID);
   },
   methods: {
-    async addToCart(product) {
-      console.log(product);
+    fetchCartProducts(ID) {
+      this.$store.dispatch('fetchCartProducts', ID);
+    },
+    addToCart(product) {
       this.$store.dispatch('addToCart', product);
-      alert('Product added to cart');
-    this.$router.push("/addtocart");
-  }
+      alert('Added to cart');
+    }
   }
 };
   </script>

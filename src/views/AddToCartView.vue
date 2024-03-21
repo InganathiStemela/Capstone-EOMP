@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <h1 class="cart-heading">Your Cart</h1>
-    <button class="back-button" @click="goBack">Back</button>
+    <router-link class="nav-link" to="/products"><button class="back-button">Add Other Product</button></router-link>
     <table v-if="cartItems.length > 0">
       <thead>
         <tr>
@@ -15,11 +15,11 @@
       </thead>
       <tbody>
         <tr v-for="(product, index) in cartItems" :key="index">
-          <!-- <td>{{ product.ID }}</td> -->
+          <td>{{ product.ID }}</td>
           <td>{{ product.NAME }}</td>
           <td><img :src="product.IMAGE" :alt="product.NAME" /></td>
           <td>{{ product.QUANTITY }}</td>
-          <td>{{ product.PRICE }}</td>
+          <td>R{{ formatAmount(product.PRICE) }}</td>
           <td>
             <button @click="removeItem(index)">
               <i class="bi bi-trash"></i>
@@ -29,69 +29,29 @@
       </tbody>
     </table>
     <p v-else class="empty-cart-text">Nothing in your cart</p>
-    <p class="subtotal">Subtotal: {{ calculateSubtotal() }}</p>
+    <p class="subtotal">Subtotal: R{{ calculateSubtotal().toFixed(0) }}</p>
+    <button class="pay-button" @click="order">Order</button>
   </div>
 </template>
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 export default {
   computed: {
     cartItems() {
-      return this.$store.getters.cartItems || [];
+      return this.$store.getters.cartItems;
     }
   },
   methods: {
-    async addToCart(cartItems) {
-    try {
-      await this.$store.dispatch('addToCart', cartItems);
-      console.log('Product added to cart successfully!');
-    } catch (error) {
-      console.error('Error adding product to cart:', error);
-    }
-  },
     removeItem(index) {
       this.$store.commit('removeFromCart', index);
     },
-    goBack() {
-    },
     calculateSubtotal() {
-      return this.cartItems.reduce((total, cartItems) => total + cartItems.PRICE, 0);
+      return this.cartItems.reduce((total, product) => total + (product.PRICE * product.QUANTITY), 0);
+    },
+    formatAmount(PRICE) {
+      return parseFloat(PRICE).toFixed(1);
     }
   }
 };
 </script>
-
-<style scoped>
-.cart-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.cart-table th,
-.cart-table td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.cart-table th {
-  background-color: #f2f2f2;
-}
-
-.remove-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.remove-button i {
-  color: green;
-}
-
-.empty-cart-text {
-  font-style: italic;
-}
-
-.subtotal {
-  font-weight: bold;
-}
-</style>
